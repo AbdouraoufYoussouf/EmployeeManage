@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace APIEmployee.Models
 {
@@ -15,6 +16,7 @@ namespace APIEmployee.Models
         public string? PhotoPath { get; set; }
         public int DepId { get; set; }
         [ForeignKey("DepId")]
+        [JsonIgnore]
         public virtual Departement Department { get; set; }
     }
 }

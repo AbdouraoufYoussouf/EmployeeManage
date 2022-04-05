@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using APIEmployee.Models;
 using EmployeManagementAPI.Data;
 using APIEmployee.DTO;
+using System.Collections;
 
 namespace APIEmployee.Controllers
 {
@@ -27,14 +28,17 @@ namespace APIEmployee.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Departement>>> GetDepartements()
         {
-            return await _context.Departements.ToListAsync();
+            var departs = await _context.Departements.Include(d=>d.Employees).ToListAsync();
+                
+
+            return Ok(departs);
         }
 
         // GET: api/Departements/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Departement>> GetDepartement(int id)
         {
-            var departement = await _context.Departements.FindAsync(id);
+            var departement = await _context.Departements.Include(d=>d.Employees).FirstOrDefaultAsync(d=>d.DepId == id);
 
             if (departement == null)
             {

@@ -11,7 +11,7 @@ namespace APIEmployee.Models
         public int DepId { get; set; }
        
         public string DepName { get; set; }
-        [JsonIgnore]
+//        [JsonIgnore]
         public virtual ICollection<Employee> Employees { get; set; }    
     }
 }

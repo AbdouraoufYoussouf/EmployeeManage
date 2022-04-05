@@ -1,6 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace APIEmployee.DTO{
+    public class EmployeeDTO{
+        
+       public int EmpId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public DateTime DateOfBrith { get; set; }
+        public string? PhotoPath { get; set; }
+      
+    }
     public class EmployeeUpdateDTO{
         
        public int EmpId { get; set; }
