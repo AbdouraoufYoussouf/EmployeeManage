@@ -31,7 +31,7 @@ namespace APIEmployee.Controllers
         {
             var employees =  _context.Employees.Include(e=>e.Department).Select(e =>
                 new EmployeeDetailsDTO(){
-                    EmpId = e.DepId,
+                    EmpId = e.EmpId,
                     FirstName = e.FirstName,
                     LastName = e.LastName,
                     Email = e.Email,
@@ -54,7 +54,7 @@ namespace APIEmployee.Controllers
                 return Ok($"Employe not exit by this Id:{id}");
             }
            var employee =  new EmployeeDetailsDTO{
-                    EmpId = empl.DepId,
+                    EmpId = empl.EmpId,
                     FirstName = empl.FirstName,
                     LastName = empl.LastName,
                     Email = empl.Email,

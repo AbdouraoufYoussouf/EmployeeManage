@@ -19,7 +19,7 @@ namespace APIEmployee.DTO{
         public string Email { get; set; }
         public DateTime DateOfBrith { get; set; }
         public string? PhotoPath { get; set; }
-        [Required]
+        [Required(ErrorMessage ="the departement is required")]
         public int DepId {get;set;}
     }
 

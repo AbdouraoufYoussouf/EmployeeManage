@@ -1,0 +1,15 @@
+.employeCont{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 80vh;
+}
+.header{
+    margin: 20px 0;
+    color: white;
+    font-size: 18px;
+}
+.linkedine{
+    width: 100%;
+    
+}
