@@ -57,6 +57,20 @@ export const updateEmploye = createAsyncThunk(
     }
   }
 )
+
+export const deleteEmpl = createAsyncThunk(
+  "employes/deleteEmploye",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(baseURL + "employes/" + id);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data);
+    } 
+  }
+);
+
 //slice
 
 export const employeSlice = createSlice({
@@ -85,6 +99,7 @@ export const employeSlice = createSlice({
                 addEmployeError : action.payload,
             };
         },
+        //Get Employe
         [getEmployes.pending]: (state, action) => {
             return {
               ...state,
@@ -110,6 +125,7 @@ export const employeSlice = createSlice({
               getEmployeError : action.payload,
             };
           },
+          // Update Employe
         [updateEmploye.pending]: (state, action) => {
             return {
               ...state,
@@ -131,6 +147,30 @@ export const employeSlice = createSlice({
               ...state,
               updateEmployeStatus : "rejected",
               updateEmployeError : action.payload,
+            };
+          },
+          // Delete Employe
+        [deleteEmpl.pending]: (state, action) => {
+            return {
+              ...state,
+              deleteEmployeStatus : "pending",
+              deleteEmployeError : "",
+            };
+          },
+          [deleteEmpl.fulfilled]: (state, action) => {
+            const currentTodos = state.employes.filter((empl) => empl.empId !== action.payload.empId);
+            state = {
+              ...state,
+              employes: currentTodos,
+              deleteEmployeStatus : "success",
+              deleteEmployeError : "",
+            };
+          },
+          [deleteEmpl.rejected]: (state, action) => {
+            state = {
+              ...state,
+              deleteEmployeStatus : "success",
+              deleteEmployeError : action.payload,
             };
           },
     }
